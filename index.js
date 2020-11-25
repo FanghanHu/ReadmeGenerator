@@ -10,6 +10,7 @@ let licenses = new Map([
     ['The Unlicense', 'https://unlicense.org'],
 ]);
 
+//ask user some information
 inquirer.prompt([
     {
         name:'title',
@@ -50,6 +51,9 @@ inquirer.prompt([
         message:"Please enter your email."
     }
 ]).then(response => {
+
+    //use user's input information to make a readme file.
+
     // noinspection JSUnresolvedVariable
     let fileContent =
 `# ${response.title}
@@ -84,6 +88,7 @@ ${response.testInstruction}
     * Via [Github](https://github.com/${response.username})
     * Via Email: ${response.email}`;
 
+    //make output folder if it doesn't exist
     if(!fs.existsSync('./output')) {
         fs.mkdirSync('./output');
     }
@@ -92,6 +97,7 @@ ${response.testInstruction}
 
 }).catch(err => {
     if(err) {
+        //show the error
         console.error(err);
     }
 });
