@@ -2,28 +2,13 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 //list of possible licenses and their link
-let licenses = [
-    {
-        name: 'GNU',
-        site: 'https://www.gnu.org/'
-    },
-    {
-        name: 'MPL 2.0',
-        site: 'https://www.mozilla.org/en-US/MPL/2.0/'
-    },
-    {
-        name: 'Apache License 2.0',
-        site: 'http://www.apache.org/licenses/'
-    },
-    {
-        name: 'MIT License',
-        site: 'https://www.mit.edu/~amini/LICENSE.md'
-    },
-    {
-        name: 'The Unlicense',
-        site: 'https://unlicense.org'
-    }
-];
+let licenses = new Map([
+    ['GNU', 'https://www.gnu.org/'],
+    ['MPL 2.0', 'https://www.mozilla.org/en-US/MPL/2.0/'],
+    ['Apache License 2.0', 'http://www.apache.org/licenses/'],
+    ['MIT License', 'https://www.mit.edu/~amini/LICENSE.md'],
+    ['The Unlicense', 'https://unlicense.org'],
+]);
 
 inquirer.prompt([
     {
@@ -54,7 +39,7 @@ inquirer.prompt([
         name:"license",
         type: 'list',
         message:"Please select a license.",
-        choices: licenses
+        choices: [...licenses.keys()]
     },
     {
         name:"username",
