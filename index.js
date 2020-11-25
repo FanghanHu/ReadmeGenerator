@@ -52,38 +52,40 @@ inquirer.prompt([
 ]).then(response => {
     // noinspection JSUnresolvedVariable
     let fileContent = `
-        # ${response.title}
+# ${response.title}
 
-        ${response.description}
-        
-        ## Table of contents
-        * [Installation instructions](#Installation-instructions)
-        * [Usages](#Usages)
-        * [Contribution Guideline](#Contribution-Guideline)
-        * [Testing Instructions](#Testing-Instructions)
-        * [Licenses](#Licenses)
-        * [Questions](#Questions)
-        
-        ## Installation instructions
-        ${response.installation}
-        
-        ## Usages
-        ${response.usage}
-        
-        ## Contribution Guideline
-        ${response.contribution}
-        
-        ## Testing Instructions
-        ${response.testInstruction}
-        
-        ## Licenses
-        [${response.license}](${licenses.get(response.license)})
-        
-        ## Questions
-        * How to contact me?
-            * Via [Github](https://github.com/${response.username})
-            * Via Email: ${response.email}
+${response.description}
+
+## Table of contents
+* [Installation instructions](#Installation-instructions)
+* [Usages](#Usages)
+* [Contribution Guideline](#Contribution-Guideline)
+* [Testing Instructions](#Testing-Instructions)
+* [Licenses](#Licenses)
+* [Questions](#Questions)
+
+## Installation instructions
+${response.installation}
+
+## Usages
+${response.usage}
+
+## Contribution Guideline
+${response.contribution}
+
+## Testing Instructions
+${response.testInstruction}
+
+## Licenses
+[${response.license}](${licenses.get(response.license)})
+
+## Questions
+* How to contact me?
+    * Via [Github](https://github.com/${response.username})
+    * Via Email: ${response.email}
     `;
+
+    fs.writeFile("./README.MD", fileContent, (err) => {if(err) console.error(err);});
 
 }).catch(err => {
     if(err) {
