@@ -51,8 +51,8 @@ inquirer.prompt([
     }
 ]).then(response => {
     // noinspection JSUnresolvedVariable
-    let fileContent = `
-# ${response.title}
+    let fileContent =
+`# ${response.title}
 
 ${response.description}
 
@@ -82,10 +82,13 @@ ${response.testInstruction}
 ## Questions
 * How to contact me?
     * Via [Github](https://github.com/${response.username})
-    * Via Email: ${response.email}
-    `;
+    * Via Email: ${response.email}`;
 
-    fs.writeFile("./README.MD", fileContent, (err) => {if(err) console.error(err);});
+    if(!fs.existsSync('./output')) {
+        fs.mkdirSync('./output');
+    }
+
+    fs.writeFile("./output/README.MD", fileContent, (err) => {if(err) console.error(err);});
 
 }).catch(err => {
     if(err) {
